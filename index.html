@@ -37,24 +37,21 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 80px; /* Tinggi area putih tetap terjaga */
+            height: 80px;
         }
 
-        /* PERUBAHAN LOGO: Diperbesar dengan Transform agar tidak merusak navbar */
         .logo {
-            position: relative;
             display: flex;
             align-items: center;
         }
 
         .logo-img {
-            height: 70px; /* Base height sedikit lebih besar */
+            height: 70px;
             width: auto;
             display: block;
-            transform: scale(2.5); /* Memperbesar visual logo 2.5x lipat */
+            transform: scale(2.5);
             transform-origin: left center;
             transition: 0.3s;
-            filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.1)); /* Menambah kedalaman visual */
         }
 
         .nav-links {
@@ -70,11 +67,6 @@
             text-decoration: none;
             color: var(--secondary-color);
             font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -105,7 +97,6 @@
             background: white;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             width: 100%;
             max-width: 600px;
             color: var(--dark-color);
@@ -122,7 +113,6 @@
             padding: 15px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            outline: none;
             font-size: 1rem;
         }
 
@@ -134,15 +124,8 @@
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .btn-track:hover {
-            background: #d47e00;
-            transform: scale(1.02);
-        }
-
-        /* Hasil Tracking */
         #resultArea {
             display: none;
             margin-top: 20px;
@@ -154,59 +137,12 @@
         .res-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
         }
 
         .res-table th, .res-table td {
             padding: 12px;
             border-bottom: 1px solid #eee;
             text-align: left;
-        }
-
-        .res-table th {
-            background: #f9f9f9;
-            color: #555;
-            width: 40%;
-        }
-
-        .status-badge {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .loading {
-            display: none;
-            margin-bottom: 15px;
-            font-style: italic;
-            color: var(--primary-color);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 80px 10%;
-            text-align: center;
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            padding: 30px;
-            background: #fff;
-            border-radius: 10px;
-            border-bottom: 5px solid var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
         }
 
         footer {
@@ -229,16 +165,42 @@
             justify-content: center;
             align-items: center;
             font-size: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             text-decoration: none;
             z-index: 1000;
         }
 
+        /* VERSI MOBILE - ADJUST LOGO KE TENGAH */
         @media (max-width: 768px) {
+            nav {
+                flex-direction: column; /* Ubah arah ke vertikal */
+                height: auto; /* Biarkan tinggi menyesuaikan */
+                padding: 20px 0;
+            }
+
+            .logo {
+                width: 100%;
+                justify-content: center; /* Logo ke tengah secara horizontal */
+                margin-bottom: 15px;
+            }
+
+            .logo-img {
+                transform: scale(1.5); /* Sesuaikan ukuran agar pas di layar HP */
+                transform-origin: center center; /* Zoom dari titik tengah */
+            }
+
+            .nav-links {
+                display: flex;
+                padding: 0;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .nav-links li {
+                margin: 0 10px; /* Jarak menu di mobile */
+            }
+
             .hero h1 { font-size: 2rem; }
             .tracking-form { flex-direction: column; }
-            .nav-links { display: none; }
-            .logo-img { transform: scale(1.5); } /* Ukuran sedikit lebih kecil di HP */
         }
     </style>
 </head>
@@ -252,7 +214,6 @@
             <li><a href="#">Beranda</a></li>
             <li><a href="#layanan">Layanan</a></li>
             <li><a href="#tracking">Cek Resi</a></li>
-            <li><a href="https://wa.me/628123456789" target="_blank">Kontak</a></li>
         </ul>
     </nav>
 
@@ -263,49 +224,28 @@
         <div class="tracking-container">
             <h3>Lacak Kiriman Anda</h3>
             <div class="tracking-form">
-                <input type="text" id="resiInput" placeholder="Masukkan No. Resi (Contoh: EJE-001)">
+                <input type="text" id="resiInput" placeholder="Masukkan No. Resi">
                 <button class="btn-track" onclick="trackAction()">LACAK</button>
             </div>
-
-            <div id="loading" class="loading">Menghubungkan ke sistem...</div>
 
             <div id="resultArea">
                 <h4 style="margin-bottom:10px;">Hasil Pelacakan:</h4>
                 <table class="res-table">
                     <tr><th>No. Resi</th><td id="resNo">-</td></tr>
-                    <tr><th>Status</th><td><span id="resStatus" class="status-badge">-</span></td></tr>
+                    <tr><th>Status</th><td id="resStatus">-</td></tr>
                     <tr><th>Lokasi</th><td id="resLoc">-</td></tr>
-                    <tr><th>Pembaruan Terakhir</th><td id="resDate">-</td></tr>
+                    <tr><th>Update</th><td id="resDate">-</td></tr>
                 </table>
             </div>
         </div>
     </section>
 
-    <section class="services" id="layanan">
-        <h2 style="margin-bottom: 40px;">Layanan Kami</h2>
-        <div class="service-grid">
-            <div class="service-card">
-                <h4>Pengiriman Barang</h4>
-                <p>Kirim paket besar, motor, mesin, hingga barang dagangan dengan aman.</p>
-            </div>
-            <div class="service-card">
-                <h4>Carter Armada</h4>
-                <p>Sewa satu truk penuh (Colt Diesel, Fuso, Tronton) khusus untuk barang Anda.</p>
-            </div>
-            <div class="service-card">
-                <h4>Jasa Pindahan</h4>
-                <p>Melayani pindahan rumah, kos, atau kantor antar kota dan antar provinsi.</p>
-            </div>
-        </div>
-    </section>
-
     <footer>
-        <p>&copy; 2026 Elsa Jaya Express. Seluruh Hak Cipta Dilindungi.</p>
-        <p>Riau - Sumatera Utara - Jakarta</p>
+        <p>&copy; 2026 Elsa Jaya Express.</p>
     </footer>
 
     <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank">
-        <span style="font-size: 14px; font-weight: bold;">WA</span>
+        <span>WA</span>
     </a>
 
     <script>
@@ -314,21 +254,12 @@
         async function trackAction() {
             const resiInput = document.getElementById('resiInput').value.trim().toUpperCase();
             const resultArea = document.getElementById('resultArea');
-            const loading = document.getElementById('loading');
-
-            if (!resiInput) {
-                alert("Silakan masukkan nomor resi!");
-                return;
-            }
-
-            loading.style.display = "block";
-            resultArea.style.display = "none";
+            if (!resiInput) { alert("Masukkan nomor resi!"); return; }
 
             try {
                 const response = await fetch(sheetUrl);
                 const data = await response.text();
                 const rows = data.split('\n');
-                
                 let foundData = null;
 
                 for (let i = 1; i < rows.length; i++) {
@@ -346,14 +277,9 @@
                     document.getElementById('resDate').innerText = foundData[3];
                     resultArea.style.display = "block";
                 } else {
-                    alert("Nomor resi tidak ditemukan.");
+                    alert("Resi tidak ditemukan.");
                 }
-            } catch (error) {
-                console.error(error);
-                alert("Gagal memuat data.");
-            } finally {
-                loading.style.display = "none";
-            }
+            } catch (e) { alert("Gagal memuat data."); }
         }
     </script>
 </body>
