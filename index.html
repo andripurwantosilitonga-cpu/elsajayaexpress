@@ -7,8 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #e63946; /* Merah sesuai logo */
-            --secondary-color: #1d3557; /* Biru Gelap Profesional */
+            --primary-color: #f39200; /* Oranye sesuai logo baru */
+            --secondary-color: #1d3557;
             --light-color: #f1faee;
             --dark-color: #1d1d1d;
         }
@@ -21,7 +21,7 @@
         }
 
         body {
-            background-color: #fff;
+            background-color: #f4f4f4;
             color: var(--dark-color);
             line-height: 1.6;
         }
@@ -29,7 +29,7 @@
         /* Navigation */
         nav {
             background: #fff;
-            padding: 15px 5%;
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,10 +39,9 @@
             z-index: 1000;
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color);
+        .logo-img {
+            height: 60px;
+            width: auto;
         }
 
         .nav-links {
@@ -67,86 +66,115 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
-            height: 80vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: white;
-            padding: 0 20px;
+            padding: 40px 20px;
         }
 
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-transform: uppercase;
         }
 
         /* Tracking Box */
         .tracking-container {
             background: white;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             width: 100%;
             max-width: 600px;
-        }
-
-        .tracking-container h3 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
+            color: var(--dark-color);
         }
 
         .tracking-form {
             display: flex;
             gap: 10px;
+            margin-bottom: 20px;
         }
 
         .tracking-form input {
             flex: 1;
-            padding: 12px;
+            padding: 15px;
             border: 2px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             outline: none;
+            font-size: 1rem;
         }
 
-        .tracking-form button {
+        .btn-track {
             padding: 12px 25px;
             background: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .tracking-form button:hover {
-            background: #c1121f;
+        .btn-track:hover {
+            background: #d47e00;
+            transform: scale(1.02);
+        }
+
+        /* Hasil Tracking */
+        #resultArea {
+            display: none;
+            margin-top: 20px;
+            text-align: left;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .res-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .res-table th, .res-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .res-table th {
+            background: #f9f9f9;
+            color: #555;
+            width: 40%;
+        }
+
+        .status-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .loading {
+            display: none;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: var(--primary-color);
         }
 
         /* Services Section */
         .services {
             padding: 80px 10%;
             text-align: center;
-        }
-
-        .section-title {
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
         }
 
         .service-grid {
@@ -168,12 +196,6 @@
             transform: translateY(-10px);
         }
 
-        .service-card h4 {
-            margin: 15px 0;
-            color: var(--secondary-color);
-        }
-
-        /* Footer */
         footer {
             background: var(--secondary-color);
             color: white;
@@ -183,8 +205,8 @@
 
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             background: #25d366;
             color: white;
             width: 60px;
@@ -194,7 +216,7 @@
             justify-content: center;
             align-items: center;
             font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             text-decoration: none;
             z-index: 1000;
         }
@@ -209,7 +231,9 @@
 <body>
 
     <nav>
-        <div class="logo">ELSA JAYA EXPRESS</div>
+        <div class="logo">
+            <img src="https://i.imgur.com/vHq1XlS.jpg" alt="Logo Elsa Jaya Express" class="logo-img">
+        </div>
         <ul class="nav-links">
             <li><a href="#">Beranda</a></li>
             <li><a href="#layanan">Layanan</a></li>
@@ -224,18 +248,27 @@
         
         <div class="tracking-container">
             <h3>Lacak Kiriman Anda</h3>
-            <form class="tracking-form" onsubmit="event.preventDefault(); alert('Fungsi tracking sedang disiapkan. Silakan hubungi admin via WhatsApp untuk status barang.');">
-                <input type="text" placeholder="Masukkan Nomor Resi / Surat Jalan..." required>
-                <button type="submit">LACAK SEKARANG</button>
-            </form>
+            <div class="tracking-form">
+                <input type="text" id="resiInput" placeholder="Masukkan No. Resi (Contoh: EJE-001)">
+                <button class="btn-track" onclick="trackAction()">LACAK</button>
+            </div>
+
+            <div id="loading" class="loading">Menghubungkan ke sistem...</div>
+
+            <div id="resultArea">
+                <h4 style="margin-bottom:10px;">Hasil Pelacakan:</h4>
+                <table class="res-table">
+                    <tr><th>No. Resi</th><td id="resNo">-</td></tr>
+                    <tr><th>Status</th><td><span id="resStatus" class="status-badge">-</span></td></tr>
+                    <tr><th>Lokasi</th><td id="resLoc">-</td></tr>
+                    <tr><th>Pembaruan Terakhir</th><td id="resDate">-</td></tr>
+                </table>
+            </div>
         </div>
     </section>
 
     <section class="services" id="layanan">
-        <div class="section-title">
-            <h2>Layanan Kami</h2>
-            <p>Solusi logistik lengkap untuk kebutuhan pribadi maupun bisnis Anda.</p>
-        </div>
+        <h2 style="margin-bottom: 40px;">Layanan Kami</h2>
         <div class="service-grid">
             <div class="service-card">
                 <h4>Pengiriman Barang</h4>
@@ -253,13 +286,63 @@
     </section>
 
     <footer>
-        <p>&copy; 2024 Elsa Jaya Express. All Rights Reserved.</p>
+        <p>&copy; 2026 Elsa Jaya Express. Seluruh Hak Cipta Dilindungi.</p>
         <p>Riau - Sumatera Utara - Jakarta</p>
     </footer>
 
     <a href="https://wa.me/628123456789" class="whatsapp-float" target="_blank">
-        <span>WA</span>
+        <span style="font-size: 14px; font-weight: bold;">WA</span>
     </a>
 
+    <script>
+        // Link CSV dari Google Sheets Anda
+        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTubiuu8FgwY12rwCoABPnUZqmSFFIXdGFZgw942bKljUvesfy45i1Ty6Y8xB_D4NecpcvO7-z5KjUo/pub?gid=190229838&single=true&output=csv";
+
+        async function trackAction() {
+            const resiInput = document.getElementById('resiInput').value.trim().toUpperCase();
+            const resultArea = document.getElementById('resultArea');
+            const loading = document.getElementById('loading');
+
+            if (!resiInput) {
+                alert("Silakan masukkan nomor resi!");
+                return;
+            }
+
+            loading.style.display = "block";
+            resultArea.style.display = "none";
+
+            try {
+                const response = await fetch(sheetUrl);
+                const data = await response.text();
+                const rows = data.split('\n');
+                
+                let foundData = null;
+
+                // Mencari data berdasarkan input (Baris 0 adalah header)
+                for (let i = 1; i < rows.length; i++) {
+                    const cols = rows[i].split(',');
+                    if (cols[0] && cols[0].trim().toUpperCase() === resiInput) {
+                        foundData = cols;
+                        break;
+                    }
+                }
+
+                if (foundData) {
+                    document.getElementById('resNo').innerText = foundData[0];
+                    document.getElementById('resStatus').innerText = foundData[1];
+                    document.getElementById('resLoc').innerText = foundData[2];
+                    document.getElementById('resDate').innerText = foundData[3];
+                    resultArea.style.display = "block";
+                } else {
+                    alert("Nomor resi tidak ditemukan. Pastikan data sudah benar di Google Sheets.");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Gagal memuat data. Periksa koneksi atau publikasi link CSV Anda.");
+            } finally {
+                loading.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
