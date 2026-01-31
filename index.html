@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #f39200; /* Oranye sesuai logo baru */
+            --primary-color: #f39200; 
             --secondary-color: #1d3557;
             --light-color: #f1faee;
             --dark-color: #1d1d1d;
@@ -37,11 +37,24 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            height: 80px; /* Tinggi area putih tetap terjaga */
+        }
+
+        /* PERUBAHAN LOGO: Diperbesar dengan Transform agar tidak merusak navbar */
+        .logo {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .logo-img {
-            height: 60px;
+            height: 70px; /* Base height sedikit lebih besar */
             width: auto;
+            display: block;
+            transform: scale(2.5); /* Memperbesar visual logo 2.5x lipat */
+            transform-origin: left center;
+            transition: 0.3s;
+            filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.1)); /* Menambah kedalaman visual */
         }
 
         .nav-links {
@@ -225,6 +238,7 @@
             .hero h1 { font-size: 2rem; }
             .tracking-form { flex-direction: column; }
             .nav-links { display: none; }
+            .logo-img { transform: scale(1.5); } /* Ukuran sedikit lebih kecil di HP */
         }
     </style>
 </head>
@@ -232,7 +246,7 @@
 
     <nav>
         <div class="logo">
-            <img src="https://imgur.com/hznoy0Q.jpg" alt="Logo Elsa Jaya Express" class="logo-img">
+            <img src="https://imgur.com/R6ubvSo.jpg" alt="Logo Elsa Jaya Express" class="logo-img">
         </div>
         <ul class="nav-links">
             <li><a href="#">Beranda</a></li>
@@ -295,7 +309,6 @@
     </a>
 
     <script>
-        // Link CSV dari Google Sheets Anda
         const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTubiuu8FgwY12rwCoABPnUZqmSFFIXdGFZgw942bKljUvesfy45i1Ty6Y8xB_D4NecpcvO7-z5KjUo/pub?gid=190229838&single=true&output=csv";
 
         async function trackAction() {
@@ -318,7 +331,6 @@
                 
                 let foundData = null;
 
-                // Mencari data berdasarkan input (Baris 0 adalah header)
                 for (let i = 1; i < rows.length; i++) {
                     const cols = rows[i].split(',');
                     if (cols[0] && cols[0].trim().toUpperCase() === resiInput) {
@@ -334,11 +346,11 @@
                     document.getElementById('resDate').innerText = foundData[3];
                     resultArea.style.display = "block";
                 } else {
-                    alert("Nomor resi tidak ditemukan. Pastikan data sudah benar di Google Sheets.");
+                    alert("Nomor resi tidak ditemukan.");
                 }
             } catch (error) {
                 console.error(error);
-                alert("Gagal memuat data. Periksa koneksi atau publikasi link CSV Anda.");
+                alert("Gagal memuat data.");
             } finally {
                 loading.style.display = "none";
             }
